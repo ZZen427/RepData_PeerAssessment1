@@ -118,49 +118,36 @@ is equal to the original dataset but with the missing data filled in.
 3. The histogram of the __imputed total number of steps taken each day__:  
     
     ```r
+    steps.daily.imputed <- unlist(tapply(data.imputed$steps,
+                                         factor(data.imputed$date), sum,
+                                         simplify = F))
     hist(steps.daily.imputed, col = "red",
          main = "Total number of steps taken each day (imputed)",
          xlab = "Total number of steps taken daily (imputed)")
     ```
     
-    ```
-    ## Error in hist(steps.daily.imputed, col = "red", main = "Total number of steps taken each day (imputed)", : object 'steps.daily.imputed' not found
-    ```
+    ![plot of chunk hist_imputed_total_steps_by_day](figure/hist_imputed_total_steps_by_day-1.png) 
 
 4. The __mean__ of the __imputed__ total number of steps taken per day:  
     
     ```r
     mean.imputed.total <- mean(steps.daily.imputed)
-    ```
-    
-    ```
-    ## Error in mean(steps.daily.imputed): object 'steps.daily.imputed' not found
-    ```
-    
-    ```r
     mean.imputed.total
     ```
     
     ```
-    ## Error in eval(expr, envir, enclos): object 'mean.imputed.total' not found
+    ## [1] 10766.19
     ```
 
     The __median__ of the __imputed__ total number of steps taken per day:  
     
     ```r
     median.imputed.total <- median(steps.daily.imputed)
-    ```
-    
-    ```
-    ## Error in median(steps.daily.imputed): object 'steps.daily.imputed' not found
-    ```
-    
-    ```r
     median.imputed.total
     ```
     
     ```
-    ## Error in eval(expr, envir, enclos): object 'median.imputed.total' not found
+    ## [1] 10766.19
     ```
 
     After imputation, mean and median are equal whereas before the median is less
@@ -173,29 +160,13 @@ is equal to the original dataset but with the missing data filled in.
     hist(steps.daily.imputed, col = impute.col,
          main = "Total number of steps taken each day (orginal vs. imputed)",
          xlab = "Total number of steps taken daily")
-    ```
-    
-    ```
-    ## Error in hist(steps.daily.imputed, col = impute.col, main = "Total number of steps taken each day (orginal vs. imputed)", : object 'steps.daily.imputed' not found
-    ```
-    
-    ```r
     # Plot the original data
     hist(steps.daily, add = T, col = origin.col)
-    ```
-    
-    ```
-    ## Error in rect(x$breaks[-nB], 0, x$breaks[-1L], y, col = col, border = border, : plot.new has not been called yet
-    ```
-    
-    ```r
     legend("topright", legend = c("original", "imputed"),
            fill = c(origin.col, impute.col), border = NA, bty = "n")
     ```
     
-    ```
-    ## Error in strwidth(legend, units = "user", cex = cex, font = text.font): plot.new has not been called yet
-    ```
+    ![plot of chunk hist_imputed_vs_original_total_steps](figure/hist_imputed_vs_original_total_steps-1.png) 
 
 ## Are there differences in activity patterns between weekdays and weekends?
 The following codes first creates a new factor variable in the dataset with two

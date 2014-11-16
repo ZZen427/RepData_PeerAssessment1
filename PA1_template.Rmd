@@ -88,6 +88,9 @@ is equal to the original dataset but with the missing data filled in.
     ```
 3. The histogram of the __imputed total number of steps taken each day__:  
     ```{r hist_imputed_total_steps_by_day, echo = TRUE}
+    steps.daily.imputed <- unlist(tapply(data.imputed$steps,
+                                         factor(data.imputed$date), sum,
+                                         simplify = F))
     hist(steps.daily.imputed, col = "red",
          main = "Total number of steps taken each day (imputed)",
          xlab = "Total number of steps taken daily (imputed)")
