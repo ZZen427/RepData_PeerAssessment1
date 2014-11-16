@@ -133,9 +133,9 @@ date.weekdays[date.weekdays %in% weekend.val] <- "weekend"
 date.weekdays[date.weekdays != "weekend"] <- "weekday"
 data.imputed.v2 <- cbind(data.imputed, weekday.weekend = factor(date.weekdays))
 
-# Split dataframe into a list of dataframes by "weekend"
+# Split dataframe into a list of dataframes by "weekend" & "weekday"
 list.data.imputed.by.weekend <- split(data.imputed.v2,
-                                     data.imputed.v2$weekday.weekend)  
+                                      data.imputed.v2$weekday.weekend)  
 # For each dataset in the list, compute the average steps over all intervals 
 interval.imputed.f <- factor(data.imputed.v2$interval)
 result.list <- lapply(list.data.imputed.by.weekend,
